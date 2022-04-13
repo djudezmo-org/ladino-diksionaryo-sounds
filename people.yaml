@@ -1,3 +1,6 @@
 - nombre: Gabor Szabo
   folder: gabor_szabo
   titulo: Un elevo de Ladino
+  files:
+    - ladino: egzempio
+      file: egzempio.ogg
