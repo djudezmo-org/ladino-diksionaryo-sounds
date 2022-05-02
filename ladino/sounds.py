@@ -8,12 +8,16 @@ def load_sounds():
     with open(os.path.join(root, 'people.yaml')) as fh:
         people = safe_load(fh)
     #print(people)
-    folders = set(filter(lambda name: os.path.isdir(os.path.join(root, name)) and name not in ['.git', 'ladino'], os.listdir(root)))
+    folders = set(filter(lambda name: os.path.isdir(os.path.join(root, 'docs', name)) and name not in ['.git', 'ladino'], os.listdir(os.path.join(root, 'docs'))))
     #print(list(folders))
-    assert set(people.keys()) == set(folders)
+    difference = set(people.keys()).difference(set(folders))
+    #print(people.keys())
+    #print(folders)
+    if difference:
+        raise Exception(difference)
     for folder in folders:
         #print(folder)
-        sound_files = set(os.listdir(os.path.join(root, folder)))
+        sound_files = set(os.listdir(os.path.join(root, 'docs', folder)))
         #print(sound_files)
         filenames = set(item['file'] for item in  people[folder]['files'])
         #print(filenames)
