@@ -1,14 +1,19 @@
 from yaml import safe_load
 import os
 
-def load_sounds():
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    sounds = {}
-    #print(root)
-    with open(os.path.join(root, 'people.yaml')) as fh:
+def root():
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+def load_peope():
+    with open(os.path.join(root(), 'people.yaml')) as fh:
         people = safe_load(fh)
     #print(people)
-    folders = set(filter(lambda name: os.path.isdir(os.path.join(root, 'docs', name)) and name not in ['.git', 'ladino'], os.listdir(os.path.join(root, 'docs'))))
+    return people
+
+def load_sounds():
+    sounds = {}
+    people = load_people()
+    folders = set(filter(lambda name: os.path.isdir(os.path.join(root(), 'docs', name)) and name not in ['.git', 'ladino'], os.listdir(os.path.join(root(), 'docs'))))
     #print(list(folders))
     difference = set(people.keys()).difference(set(folders))
     #print(people.keys())
@@ -17,7 +22,7 @@ def load_sounds():
         raise Exception(difference)
     for folder in folders:
         #print(folder)
-        sound_files = set(os.listdir(os.path.join(root, 'docs', folder)))
+        sound_files = set(os.listdir(os.path.join(root(), 'docs', folder)))
         #print(sound_files)
         filenames = set(item['file'] for item in  people[folder]['files'])
         #print(filenames)
@@ -38,6 +43,8 @@ def load_sounds():
 
 
 if __name__ == '__main__':
+    people = load_people()
     sounds = load_sounds()
     print("Looks good")
     print(sounds)
+    print(people)
