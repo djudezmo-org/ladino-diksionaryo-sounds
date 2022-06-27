@@ -1,4 +1,4 @@
-Git repository to hold the sound files for the [Ladino directory](https://diksionaryo.szabgab.com/) project
+Git repository to hold the sound files for the [Ladino directory](https://kantoniko.com/) project
 
 ## Sound files
 
