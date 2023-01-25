@@ -4,7 +4,7 @@ import os
 def root():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-def load_peope():
+def load_people():
     with open(os.path.join(root(), 'people.yaml')) as fh:
         people = safe_load(fh)
     #print(people)
@@ -24,20 +24,20 @@ def load_sounds():
         #print(folder)
         sound_files = set(os.listdir(os.path.join(root(), 'docs', folder)))
         #print(sound_files)
-        filenames = set(item['file'] for item in  people[folder]['files'])
+        #filenames = set(item['file'] for item in  people[folder]['files'])
         #print(filenames)
-        if sound_files != filenames:
-            exit("Not the same")
-    for folder in people:
-        for sound in people[folder]['files']:
-            ladino = sound['ladino']
-            if ladino not in sounds:
-                sounds[ladino] = []
-            sounds[ladino].append({
-                'filename': folder + '/' + sound['file'],
-                'nombre': people[folder]['nombre'],
-                'titulo': people[folder]['titulo'],
-            })
+        #if sound_files != filenames:
+        #    exit("Not the same")
+    #for folder in people:
+    #    for sound in people[folder]['files']:
+    #        ladino = sound['ladino']
+    #        if ladino not in sounds:
+    #            sounds[ladino] = []
+    #        sounds[ladino].append({
+    #            'filename': folder + '/' + sound['file'],
+    #            'nombre': people[folder]['nombre'],
+    #            'titulo': people[folder]['titulo'],
+    #        })
 
     return sounds
 
